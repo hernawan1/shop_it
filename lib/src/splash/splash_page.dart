@@ -1,5 +1,6 @@
-import 'dart:io';
+import 'dart:async';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_it/common/shared_prefs_services.dart';
@@ -16,18 +17,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  Connectivity connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> connectionSubscription;
   bool? isOnline;
 
   Future<void> checkNetwork() async {
-    isOnline = await hasNetwork();
-  }
-
-  Future<bool> hasNetwork() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
-    } on SocketException catch (_) {
-      return false;
+    late ConnectivityResult result;
+    result = await connectivity.checkConnectivity();
+    if (result == ConnectivityResult.none) {
+      setState(() {
+        isOnline = true;
+      });
+    } else {
+      setState(() {
+        isOnline = false;
+      });
     }
   }
 
