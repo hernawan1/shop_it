@@ -16,9 +16,17 @@ class _CartViewState extends State<CartView> {
   int qty = 1;
   int harga = 1000;
   String button = 'nonfuction';
+  int item = 0;
   late int newharga = 1000;
 
   int _total = 0;
+
+  void setItem() async {
+    item = await CartProvider.db.countCart();
+    setState(() {
+      item = item;
+    });
+  }
 
   void _calcTotal() async {
     var total = await CartProvider.db.calculateTotal();
@@ -38,6 +46,7 @@ class _CartViewState extends State<CartView> {
     // TODO: implement initState
     super.initState();
     _calcTotal();
+    setItem();
   }
 
   @override
@@ -241,7 +250,7 @@ class _CartViewState extends State<CartView> {
                                                                                   ),
                                                                                   border: Border.all(color: grey),
                                                                                   color: white),
-                                                                              child: Center(
+                                                                              child: const Center(
                                                                                 child: Text('+', style: TextStyle(color: black, fontSize: 16.0)),
                                                                               ),
                                                                             ),
@@ -297,7 +306,7 @@ class _CartViewState extends State<CartView> {
                   if (snapshot.data == null) {
                     return Center(
                         child: Container(
-                      child: new Text("Loading..."),
+                      child: Text("Loading..."),
                     ));
                   } else {
                     return _total == 0
@@ -310,11 +319,11 @@ class _CartViewState extends State<CartView> {
                                     width: MediaQuery.of(context).size.width,
                                     height: MediaQuery.of(context).size.height *
                                         0.06,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Color(0xFF5EAAA8),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(50))),
-                                    child: Center(
+                                    child: const Center(
                                         child: Text(
                                       "There are currently no orders",
                                       style: TextStyle(
@@ -336,7 +345,7 @@ class _CartViewState extends State<CartView> {
                                       color: Colors.grey.withOpacity(0.3),
                                       spreadRadius: 0.8,
                                       blurRadius: 5,
-                                      offset: Offset(
+                                      offset: const Offset(
                                           0, 1), // changes position of shadow
                                     ),
                                   ],
@@ -349,14 +358,15 @@ class _CartViewState extends State<CartView> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        const Text(
-                                          "Total :",
+                                        Text(
+                                          "Total : ${item.toString()} Item",
                                           style: TextStyle(
-                                              fontSize: 21,
+                                              color: grey,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
-                                          'USD ${_total != 0 ? _total : '0'}',
+                                          'Total : USD ${_total != 0 ? _total : '0'}',
                                           style: const TextStyle(
                                               fontSize: 21,
                                               fontWeight: FontWeight.bold),
@@ -371,11 +381,11 @@ class _CartViewState extends State<CartView> {
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.06,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: primary,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20))),
-                                        child: Center(
+                                        child: const Center(
                                             child: Text(
                                           "Proceed to checkout",
                                           style: TextStyle(

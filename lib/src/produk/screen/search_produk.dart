@@ -20,7 +20,6 @@ class SearchProduk extends StatefulWidget {
 class _SearchProdukState extends State<SearchProduk> {
   final SearchProdukBloc _searchProdukBloc = SearchProdukBloc();
   TextEditingController searchController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
   int notif = 0;
 
   void clearValue() {
