@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:shop_it/common/constant.dart';
 import 'package:shop_it/sqlite/cart.dart';
 import 'package:shop_it/src/cart/screen/cart.dart';
@@ -113,7 +114,89 @@ class _ProdukState extends State<Produk> with TickerProviderStateMixin {
                   child: BlocBuilder<KategoriProdukBloc, KategoriProdukState>(
                       builder: (context, state) {
                     if (state is KategoriProdukLoading) {
-                      return Container();
+                      return TabBar(
+                        isScrollable: true,
+                        unselectedLabelColor: primary,
+                        labelColor: Colors.white,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        indicatorPadding: EdgeInsets.zero,
+                        indicatorColor: Colors.transparent,
+                        dividerColor: Colors.transparent,
+                        indicator: const BubbleTabIndicator(
+                          indicatorHeight: 35.0,
+                          indicatorColor: primary,
+                          tabBarIndicatorSize: TabBarIndicatorSize.label,
+                          indicatorRadius: 100,
+                        ),
+                        tabs: [
+                          Tab(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 20.0, right: 20),
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(color: primary, width: 2)),
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: Text('Loading'),
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 20.0, right: 20),
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(color: primary, width: 2)),
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: Text('Loading'),
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 20.0, right: 20),
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(color: primary, width: 2)),
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: Text('Loading'),
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 20.0, right: 20),
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(color: primary, width: 2)),
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: Text('Loading'),
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 20.0, right: 20),
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(color: primary, width: 2)),
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: Text('Loading'),
+                              ),
+                            ),
+                          ),
+                        ],
+                        controller: _tabController,
+                      );
                     } else if (state is KategoriProdukLoaded) {
                       final List<Tab> tabs = <Tab>[];
                       for (int i = 0;
@@ -369,7 +452,71 @@ class _ProdukState extends State<Produk> with TickerProviderStateMixin {
                                                                   ),
                                                                 ))));
                                               }
-                                              return Container();
+                                              return ConstrainedBox(
+                                                  constraints: BoxConstraints(
+                                                      minHeight: 500.h,
+                                                      maxHeight: 5000.h,
+                                                      maxWidth: 100.w,
+                                                      minWidth: 100.w),
+                                                  child: GridView.builder(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              20),
+                                                      gridDelegate:
+                                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 2,
+                                                        childAspectRatio: 0.76,
+                                                        crossAxisSpacing: 0.6,
+                                                      ),
+                                                      physics:
+                                                          const NeverScrollableScrollPhysics(),
+                                                      shrinkWrap: true,
+                                                      itemCount: 6,
+                                                      cacheExtent: 100,
+                                                      controller:
+                                                          ScrollController(
+                                                              keepScrollOffset:
+                                                                  false),
+                                                      itemBuilder:
+                                                          (context, index) =>
+                                                              Shimmer
+                                                                  .fromColors(
+                                                                baseColor: Colors
+                                                                    .grey
+                                                                    .shade300,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .white,
+                                                                child: InkWell(
+                                                                    onTap:
+                                                                        () {},
+                                                                    child:
+                                                                        Container(
+                                                                      margin: const EdgeInsets
+                                                                          .all(
+                                                                          10),
+                                                                      width:
+                                                                          100,
+                                                                      height:
+                                                                          50,
+                                                                      decoration: BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.grey.withOpacity(0.2),
+                                                                              spreadRadius: 2,
+                                                                              blurRadius: 2,
+                                                                              offset: Offset(0, 1),
+                                                                            )
+                                                                          ],
+                                                                          color: Colors
+                                                                              .white,
+                                                                          borderRadius: const BorderRadius
+                                                                              .all(
+                                                                              Radius.circular(20))),
+                                                                      child:
+                                                                          Center(),
+                                                                    )),
+                                                              )));
                                             },
                                           ),
                                         ),
