@@ -42,4 +42,17 @@ class ApiProvider extends ChangeNotifier {
       throw Exception(error);
     }
   }
+
+  Future<ProdukModel> searchProduk(String? nameProduk) async {
+    try {
+      var url = _baseUrl + '/products/?title={$nameProduk}';
+      print(url);
+      Response response = await _dio
+          .get(_baseUrl + '/products/?title=' + nameProduk.toString());
+      print(response.data.length);
+      return ProdukModel.fromJson(response.data);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
 }

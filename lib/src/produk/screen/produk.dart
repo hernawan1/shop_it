@@ -12,6 +12,7 @@ import 'package:shop_it/src/produk/bloc/produk_list_bloc.dart';
 import 'package:shop_it/src/produk/model/kategori_produk.dart';
 import 'package:shop_it/src/produk/model/produklist.dart';
 import 'package:shop_it/src/produk/screen/detail_produk.dart';
+import 'package:shop_it/src/produk/screen/search_produk.dart';
 import 'package:sizer/sizer.dart';
 
 class Produk extends StatefulWidget {
@@ -51,7 +52,10 @@ class _ProdukState extends State<Produk> with TickerProviderStateMixin {
         backgroundColor: white,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  CupertinoPageRoute(builder: (context) => SearchProduk()));
+            },
             icon: const Icon(
               Icons.search,
               size: 30,

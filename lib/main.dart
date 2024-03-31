@@ -6,6 +6,7 @@ import 'package:shop_it/common/constant.dart';
 import 'package:shop_it/src/auth/cubit/auth_cubit.dart';
 import 'package:shop_it/src/produk/bloc/kategori_produk_bloc.dart';
 import 'package:shop_it/src/produk/bloc/produk_list_bloc.dart';
+import 'package:shop_it/src/produk/bloc/search_produk_bloc.dart';
 
 import 'package:shop_it/src/splash/splash_page.dart';
 import 'package:sizer/sizer.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
         BlocProvider<ProdukListBloc>(create: (context) => ProdukListBloc()),
+        BlocProvider<SearchProdukBloc>(create: (context) => SearchProdukBloc()),
         BlocProvider<KategoriProdukBloc>(
             create: (context) => KategoriProdukBloc()),
       ],

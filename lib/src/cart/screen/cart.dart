@@ -300,7 +300,7 @@ class _CartViewState extends State<CartView> {
                       child: new Text("Loading..."),
                     ));
                   } else {
-                    return _total == null
+                    return _total == 0
                         ? Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
